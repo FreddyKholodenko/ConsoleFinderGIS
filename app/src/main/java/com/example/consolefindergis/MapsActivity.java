@@ -110,7 +110,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onMarkerClick(Marker marker) {
                 String markerName = marker.getTitle();
-                Toast.makeText(MapsActivity.this, "Clicked location is " + markerName, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MapsActivity.this,SellersListActivity.class);
+                intent.putExtra("city", markerName);
+                startActivity(intent);
+                //Toast.makeText(MapsActivity.this, "Clicked location is " + markerName, Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
