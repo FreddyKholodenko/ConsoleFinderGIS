@@ -6,10 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,11 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -77,7 +71,7 @@ public class MainMenu extends AppCompatActivity {
                     }
                 });
                 //setting HashSet to draw the cities
-                //setting HashMap to count the cities so we can
+                //setting HashMap to count the cities so we can add the numbers on markers
                 HashSet<String> locationsToDraw = new HashSet<>();
                 List<String> locationList = Collections.<String>emptyList();
                 //HashMap<String, Integer> locationCounter = new HashMap<String, Integer>();
@@ -102,7 +96,6 @@ public class MainMenu extends AppCompatActivity {
                                     name = "תל אביב-יפו";
                                 }
                                 locationsToDraw.add(name);
-                                locationList.add(name);
 
                             }
                             counter++;
