@@ -36,6 +36,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="City Name" />
+    <TextView
+        android:id="@+id/itemPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Item Price" />
 
     <ImageView
         android:id="@+id/imageView"

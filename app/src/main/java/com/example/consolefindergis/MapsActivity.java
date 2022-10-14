@@ -35,6 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker marker;
     static private String city;
     static private String console;
+    static private ArrayList<String> indexes = new ArrayList();
     static private SupportMapFragment mapFragment;
 
 
@@ -112,6 +113,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String markerName = marker.getTitle();
                 Intent intent = new Intent(MapsActivity.this,SellersListActivity.class);
                 intent.putExtra("city", markerName);
+                intent.putExtra("console",MapsActivity.console);
+                intent.putExtra("indexes",MapsActivity.indexes);
                 startActivity(intent);
                 //Toast.makeText(MapsActivity.this, "Clicked location is " + markerName, Toast.LENGTH_SHORT).show();
                 return false;
@@ -135,6 +138,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (extras != null) {
             this.city = extras.getString("city");
             this.console = extras.getString("console");
+            this.indexes = extras.getStringArrayList("indexes");
         }
     }
 

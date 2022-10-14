@@ -104,9 +104,12 @@ public class MainMenu extends AppCompatActivity {
                         System.out.println(locationsToDraw);
                         Intent intent = new Intent(MainMenu.this,MapsActivity.class);
                         ArrayList<String> conversionToList = new ArrayList<>();
+                        ArrayList<String> conversionIndexesKeyToList = new ArrayList<>();
+                        conversionIndexesKeyToList.addAll(indexes);
                         conversionToList.addAll(locationsToDraw);
                         intent.putExtra("city",conversionToList.toString());
                         intent.putExtra("console",dropdown.getSelectedItem().toString());
+                        intent.putExtra("indexes",conversionIndexesKeyToList.toString());
                         startActivity(intent);
                     }
 
