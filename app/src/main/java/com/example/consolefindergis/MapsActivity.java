@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,6 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     static private String city;
     static private String console;
     static private SupportMapFragment mapFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +106,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(initialCamera));
         mMap.setMinZoomPreference(8.5f);
         mMap.setMaxZoomPreference(14.0f);
-
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String markerName = marker.getTitle();
+                Toast.makeText(MapsActivity.this, "Clicked location is " + markerName, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
         /*
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             //TODO set the first coordinate of the city, also get data from firebase accordingly
