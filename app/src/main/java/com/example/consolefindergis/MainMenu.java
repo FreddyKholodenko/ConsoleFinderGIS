@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.io.*;
+import java.lang.*;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -82,22 +85,25 @@ public class MainMenu extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         int counter = 0;
-
+                        String word;
                         for(DataSnapshot location:snapshot.getChildren())
                         {
-
-                            if(indexes.contains(counter+""))
-                            {
-                                String name = location.getValue(String.class);
-
-                                name.trim();
-                                if(name.equals("תל אביב")|| name.equals("תל אביב -יפו"))
+                            word = counter + "";
+                            for (String index:indexes) {
+                                if(index.contentEquals(word))
                                 {
-                                    name = "תל אביב-יפו";
-                                }
-                                locationsToDraw.add(name);
+                                    String name = location.getValue(String.class);
 
+                                    name.trim();
+                                    if(name.equals("תל אביב")|| name.equals("תל אביב -יפו"))
+                                    {
+                                        name = "תל אביב-יפו";
+                                    }
+                                    locationsToDraw.add(name);
+
+                                }
                             }
+
                             counter++;
                         }
 

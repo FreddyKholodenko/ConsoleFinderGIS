@@ -59,6 +59,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.sellerName.setText(salesInfo.sellerName);
         holder.sellerNumber.setText(salesInfo.sellerNumber);
         holder.itemPrice.setText(salesInfo.itemPrice);
+        holder.city.setText(salesInfo.city);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +69,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 bundle.putString("sellerName", salesInfo.sellerName);
                 bundle.putString("sellerNumber", salesInfo.sellerNumber);
                 bundle.putString("itemPrice", salesInfo.itemPrice);
+                bundle.putString("city", salesInfo.city);
 
             }
         });
@@ -81,4 +83,3 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
 
 }
-

@@ -35,7 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker marker;
     static private String city;
     static private String console;
-    static private ArrayList<String> indexes = new ArrayList();
+    static private String indexes;
     static private SupportMapFragment mapFragment;
 
 
@@ -58,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void findCoordinates()
     {
-               reference.addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -138,7 +138,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (extras != null) {
             this.city = extras.getString("city");
             this.console = extras.getString("console");
-            this.indexes = extras.getStringArrayList("indexes");
+            this.indexes = extras.getString("indexes");
         }
     }
 
