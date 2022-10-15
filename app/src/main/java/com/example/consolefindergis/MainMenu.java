@@ -42,8 +42,6 @@ public class MainMenu extends AppCompatActivity {
         String[] items = new String[]{"PS VITA", "PSP", "Wii", "XBox", "XBox 360", "XBox ONE", "נינטנדו", "פלייסטיישן", "פלייסטיישן 2", "פלייסטיישן 3", "פלייסטיישן 4" };
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
-//TODO change input city to fetch from database
-
         ArrayList<String> indexes = new ArrayList();
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +49,6 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
 
                 String dropdownChoice = dropdown.getSelectedItem().toString();
-
                 //checks indexes so we can connect the chosen console to other related data
                 consoleReference.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -67,15 +64,12 @@ public class MainMenu extends AppCompatActivity {
                             counter++;
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
                 //setting HashSet to draw the cities
                 HashSet<String> locationsToDraw = new HashSet<>();
-
                 locationReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -88,21 +82,16 @@ public class MainMenu extends AppCompatActivity {
                                 if(index.contentEquals(word))
                                 {
                                     String name = location.getValue(String.class);
-
                                     name.trim();
                                     if(name.equals("תל אביב")|| name.equals("תל אביב -יפו"))
                                     {
                                         name = "תל אביב-יפו";
                                     }
                                     locationsToDraw.add(name);
-
                                 }
                             }
-
                             counter++;
                         }
-
-                        System.out.println(locationsToDraw);
                         Intent intent = new Intent(MainMenu.this,MapsActivity.class);
                         ArrayList<String> conversionToList = new ArrayList<>();
                         ArrayList<String> conversionIndexesKeyToList = new ArrayList<>();
@@ -119,11 +108,7 @@ public class MainMenu extends AppCompatActivity {
 
                     }
                 });
-
-
-
             }
         });
-
     }
 }

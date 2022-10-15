@@ -12,7 +12,6 @@ public class SalesInfo {
 
     public SalesInfo() {
     }
-
     String title;
     String city;
     String description;

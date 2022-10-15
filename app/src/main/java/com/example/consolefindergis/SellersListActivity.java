@@ -22,7 +22,6 @@ import java.util.Arrays;
 
 public class SellersListActivity extends Activity {
     private DatabaseReference rootReference = FirebaseDatabase.getInstance("https://console-finder-gis-f12bd-default-rtdb.firebaseio.com/").getReference();
-
     static private String console;
     static private String city;
     ArrayList<String> indexes = new ArrayList();
@@ -34,22 +33,16 @@ public class SellersListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seller_list_layout);
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             this.city = extras.getString("city");
             this.console = extras.getString("console");
             this.indexes = extras.getStringArrayList("indexes");
         }
-
-
         salesInfo = new ArrayList<>();
-
-
         RecyclerView recyclerView = findViewById(R.id.recycleList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setHasFixedSize(true);
-
         //checks indexes so we can connect the chosen console to other related data
         rootReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -67,15 +60,12 @@ public class SellersListActivity extends Activity {
                     if(locationName.equals(city))
                     {
                         word = counter + "";
-
                         for (String index:indexes) {
                             if(index.contentEquals(word))
                             {
                                 updatedIndexes.add(counter+ "");
                             }
                         }
-
-
                     }
                     counter++;
                 }
@@ -92,10 +82,7 @@ public class SellersListActivity extends Activity {
                     String price ="מחיר: " + "₪" + (String) snapshot.child("Price").child(index).getValue();
                     String sellerPhone = "טלפון: " + (String) snapshot.child("Seller Phone").child(index).getValue();
                     String city = "עיר: " + (String) snapshot.child("Location").child(index).getValue();
-
-
                     SalesInfo salesInfoObject = new SalesInfo(title,description,sellerName,price,sellerPhone,city);
-
                     salesInfo.add(salesInfoObject);
                 }
                 adapter = new MyRecyclerViewAdapter(getApplicationContext(), salesInfo);

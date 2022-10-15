@@ -13,12 +13,10 @@ import java.util.List;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.SalesViewHolder> {
 
     private List<SalesInfo> mData;
-    //private LayoutInflater mInflater;
     private Context context;
 
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, List<SalesInfo> data) {
-        //this.mInflater = LayoutInflater.from(context);
         this.context=context;
         this.mData = data;
     }
@@ -75,7 +73,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         });
     }
 
-    // total number of rows
     @Override
     public int getItemCount() {
         return mData.size();

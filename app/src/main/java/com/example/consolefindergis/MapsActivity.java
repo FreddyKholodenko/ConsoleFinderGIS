@@ -97,13 +97,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-
         mMap = googleMap;
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         LatLng initialCamera = new LatLng(32.0337564, 34.739131);
-        //mMap.addMarker(new MarkerOptions().position(initialCamera).title("Marker in Tel-Aviv"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(initialCamera));
         mMap.setMinZoomPreference(8.5f);
         mMap.setMaxZoomPreference(14.0f);
@@ -120,17 +115,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
         });
-        /*
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            //TODO set the first coordinate of the city, also get data from firebase accordingly
-            @Override
-            public void onMapClick(@NonNull LatLng latLng) {
-                Intent intent = new Intent(MapsActivity.this,SellersListActivity.class);
-                intent.putExtra("city", "rehovot");
-                startActivity(intent);
-            }
-        });
-*/
+
     }
 
     private void setSearchParamsFromExtras() {
@@ -149,9 +134,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    @Override
-    public void onBackPressed()
-    {
-        this.finish();
-    }
 }
