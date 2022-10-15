@@ -74,12 +74,7 @@ public class MainMenu extends AppCompatActivity {
                     }
                 });
                 //setting HashSet to draw the cities
-                //setting HashMap to count the cities so we can add the numbers on markers
                 HashSet<String> locationsToDraw = new HashSet<>();
-                List<String> locationList = Collections.<String>emptyList();
-                //HashMap<String, Integer> locationCounter = new HashMap<String, Integer>();
-                //locationCounter.put("תל אביב-יפו", 7);
-                //locationCounter.get("תל אביב-יפו");
 
                 locationReference.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -115,7 +110,7 @@ public class MainMenu extends AppCompatActivity {
                         conversionToList.addAll(locationsToDraw);
                         intent.putExtra("city",conversionToList.toString());
                         intent.putExtra("console",dropdown.getSelectedItem().toString());
-                        intent.putExtra("indexes",conversionIndexesKeyToList.toString());
+                        intent.putExtra("indexes",indexes);
                         startActivity(intent);
                     }
 

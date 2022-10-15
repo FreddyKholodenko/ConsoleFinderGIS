@@ -25,7 +25,7 @@ public class SellersListActivity extends Activity {
 
     static private String console;
     static private String city;
-    static private String indexes;
+    ArrayList<String> indexes = new ArrayList();
 
     MyRecyclerViewAdapter adapter;
     ArrayList<SalesInfo> salesInfo;
@@ -34,15 +34,12 @@ public class SellersListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seller_list_layout);
-        //TODO get data from firebase
-        // set up the RecyclerView
-
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             this.city = extras.getString("city");
             this.console = extras.getString("console");
-            this.indexes = extras.getString("indexes");
+            this.indexes = extras.getStringArrayList("indexes");
         }
 
 
@@ -58,6 +55,8 @@ public class SellersListActivity extends Activity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int counter = 0;
+                String word;
+                System.out.println(indexes);
                 for(DataSnapshot LocationCheck:snapshot.child("Location").getChildren())
                 {
                     String locationName = LocationCheck.getValue().toString().trim();
@@ -65,9 +64,18 @@ public class SellersListActivity extends Activity {
                     {
                         locationName = "תל אביב-יפו";
                     }
-                    if(locationName.equals(city) && indexes.contains(counter+""))
+                    if(locationName.equals(city))
                     {
-                        updatedIndexes.add(counter+ "");
+                        word = counter + "";
+
+                        for (String index:indexes) {
+                            if(index.contentEquals(word))
+                            {
+                                updatedIndexes.add(counter+ "");
+                            }
+                        }
+
+
                     }
                     counter++;
                 }

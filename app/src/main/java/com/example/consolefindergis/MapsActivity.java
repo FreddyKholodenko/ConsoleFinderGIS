@@ -35,7 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker marker;
     static private String city;
     static private String console;
-    static private String indexes;
+    static private ArrayList<String> indexes = new ArrayList();
     static private SupportMapFragment mapFragment;
 
 
@@ -61,7 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 for(DataSnapshot city:snapshot.getChildren())
                 {
                     PolygonOptions rectOption = new PolygonOptions();
@@ -83,6 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Polygon polygon = mMap.addPolygon(rectOption);
                         LatLng locationFirstCoordinates = new LatLng(city.child("geometry").child("coordinates").child("0").child("0").child("0").child("1").getValue(Double.class),city.child("geometry").child("coordinates").child("0").child("0").child("0").child("0").getValue(Double.class));
                         mMap.addMarker(new MarkerOptions().position(locationFirstCoordinates).title(name));
+
                     }
                 }
             }
@@ -138,7 +138,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (extras != null) {
             this.city = extras.getString("city");
             this.console = extras.getString("console");
-            this.indexes = extras.getString("indexes");
+            this.indexes = extras.getStringArrayList("indexes");
         }
     }
 
@@ -147,5 +147,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onResume();
         mapFragment.getMapAsync(this);
 
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        this.finish();
     }
 }
