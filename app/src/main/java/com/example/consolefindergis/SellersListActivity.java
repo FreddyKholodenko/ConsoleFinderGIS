@@ -1,24 +1,16 @@
 package com.example.consolefindergis;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-
 
 public class SellersListActivity extends Activity {
     private DatabaseReference rootReference = FirebaseDatabase.getInstance("https://console-finder-gis-f12bd-default-rtdb.firebaseio.com/").getReference();
@@ -82,7 +74,8 @@ public class SellersListActivity extends Activity {
                     String price ="מחיר: " + "₪" + (String) snapshot.child("Price").child(index).getValue();
                     String sellerPhone = "טלפון: " + (String) snapshot.child("Seller Phone").child(index).getValue();
                     String city = "עיר: " + (String) snapshot.child("Location").child(index).getValue();
-                    SalesInfo salesInfoObject = new SalesInfo(title,description,sellerName,price,sellerPhone,city);
+                    String url = (String) snapshot.child("Image URL").child(index).getValue();
+                    SalesInfo salesInfoObject = new SalesInfo(title,description,sellerName,price,sellerPhone,city,url);
                     salesInfo.add(salesInfoObject);
                 }
                 adapter = new MyRecyclerViewAdapter(getApplicationContext(), salesInfo);

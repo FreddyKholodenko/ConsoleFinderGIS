@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -14,6 +17,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     private List<SalesInfo> mData;
     private Context context;
+    private String url;
 
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, List<SalesInfo> data) {
@@ -26,7 +30,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // stores and recycles views as they are scrolled off screen
     public class SalesViewHolder extends RecyclerView.ViewHolder {
         TextView title,description,sellerName,sellerNumber,city,itemPrice;
-
+        ImageView imageView;
         SalesViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title_page);
@@ -35,6 +39,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             sellerNumber = itemView.findViewById(R.id.sellerNumber);
             city = itemView.findViewById(R.id.city);
             itemPrice = itemView.findViewById(R.id.itemPrice);
+            imageView = itemView.findViewById(R.id.imageView);
+
         }
 
     }
@@ -58,19 +64,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.sellerNumber.setText(salesInfo.sellerNumber);
         holder.itemPrice.setText(salesInfo.itemPrice);
         holder.city.setText(salesInfo.city);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("description", salesInfo.description);
-                bundle.putString("title", salesInfo.title);
-                bundle.putString("sellerName", salesInfo.sellerName);
-                bundle.putString("sellerNumber", salesInfo.sellerNumber);
-                bundle.putString("itemPrice", salesInfo.itemPrice);
-                bundle.putString("city", salesInfo.city);
-
-            }
-        });
+        Glide.with(context).load(salesInfo.url).into(holder.imageView);
     }
 
     @Override

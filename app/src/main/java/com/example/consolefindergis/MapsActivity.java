@@ -78,10 +78,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         {
                             rectOption.add(new LatLng(coordinates.child("1").getValue(Double.class),coordinates.child("0").getValue(Double.class)));
                         }
-                        rectOption.fillColor(0x55FF00FF).strokeColor(Color.MAGENTA);
+                        rectOption.fillColor(0x55FF00FF).strokeColor(android.R.color.transparent);
                         Polygon polygon = mMap.addPolygon(rectOption);
-                        LatLng locationFirstCoordinates = new LatLng(city.child("geometry").child("coordinates").child("0").child("0").child("0").child("1").getValue(Double.class),city.child("geometry").child("coordinates").child("0").child("0").child("0").child("0").getValue(Double.class));
-                        mMap.addMarker(new MarkerOptions().position(locationFirstCoordinates).title(name));
+                        polygon.setClickable(true);
+                        polygon.setTag(name);
+               //         LatLng locationFirstCoordinates = new LatLng(city.child("geometry").child("coordinates").child("0").child("0").child("0").child("1").getValue(Double.class),city.child("geometry").child("coordinates").child("0").child("0").child("0").child("0").getValue(Double.class));
+                   //     mMap.addMarker(new MarkerOptions().position(locationFirstCoordinates).title(name));
 
                     }
                 }
@@ -102,10 +104,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(initialCamera));
         mMap.setMinZoomPreference(8.5f);
         mMap.setMaxZoomPreference(14.0f);
+
+        mMap.setOnPolygonClickListener(new GoogleMap.OnPolygonClickListener() {
+            @Override
+            public void onPolygonClick (Polygon polygon) {
+                String polygonName = (String)polygon.getTag();
+                Intent intent = new Intent(MapsActivity.this,SellersListActivity.class);
+                intent.putExtra("city", polygonName);
+                intent.putExtra("console",MapsActivity.console);
+                intent.putExtra("indexes",MapsActivity.indexes);
+                startActivity(intent);
+            }
+        });
+
+
+/*
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 String markerName = marker.getTitle();
+
                 Intent intent = new Intent(MapsActivity.this,SellersListActivity.class);
                 intent.putExtra("city", markerName);
                 intent.putExtra("console",MapsActivity.console);
@@ -115,7 +133,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
         });
-
+*/
     }
 
     private void setSearchParamsFromExtras() {
